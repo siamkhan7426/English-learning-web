@@ -1,3 +1,12 @@
+// -----------------------array function synonyms -----------------
+
+const synonymsFunction = (arr)=>{
+
+  const arrayData = arr.map(elemnet=> `<span class="btn">${elemnet}</span>`)
+  return arrayData.join(" ")
+}
+
+
 
 // api call lesion 
 const dynamicBtnLesionApiCall = async () => {
@@ -38,13 +47,21 @@ const infoDisply = async (infoId)=>{
 
 // ---------------------------------------------modal show function -----------------------
 const loadShowModal = (modalOpen) =>{
+ /// console.log(modalOpen)
+  const {word,pronunciation,sentence, meaning, synonyms} = modalOpen
+    //console.log(word,sentence, meaning, synonyms)
     const detailsContainer = document.getElementById("details-container");
     
     detailsContainer.innerHTML = `
-    
-    
+    <h2 class="text-2xl font-semibold">${word}(<i class="fa-solid fa-microphone-lines"></i>:${pronunciation})</h2>
+    <h3 class="text-lg font-semibold">Meaning</h3>
+    <p class="font-bangla">${meaning}</p>
+    <h2 class="text-lg font-semibold">Example</h2>
+    <p>${sentence}</p>
+    <h3 class="font-bangla text-lg font-semibold">সমার্থক শব্দ গুলো</h3>
+    <div>${synonymsFunction(synonyms)}</div>
     `
-    document.getElementById("my_modal").showModal()
+    document.getElementById("my_modal").showModal();
 
 };
 
