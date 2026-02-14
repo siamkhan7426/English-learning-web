@@ -26,6 +26,27 @@ const Spinner = (stus) => {
   
  
 };
+// ---------------------------------info function call -------------------------------------
+
+const infoDisply = async (infoId)=>{
+
+  const responsive = await fetch(`https://openapi.programming-hero.com/api/word/${infoId}`);
+  const data = await responsive.json();
+  loadShowModal(data.data)
+  
+}
+
+// ---------------------------------------------modal show function -----------------------
+const loadShowModal = (modalOpen) =>{
+    const detailsContainer = document.getElementById("details-container");
+    
+    detailsContainer.innerHTML = `
+    
+    
+    `
+    document.getElementById("my_modal").showModal()
+
+};
 
 // ---------------------------dynamic card add --------------------------------------------
 const dynamicCardSection = async (levelId) => {
@@ -63,7 +84,8 @@ const displyCardSection = (id) => {
     return
   };
   id.forEach(cardId => {
-    const { word, meaning, pronunciation } = cardId
+    
+    const {id, word, meaning, pronunciation } = cardId
     const div = document.createElement("div");
     div.innerHTML = `
      <div  class=" border rounded-sm py-6 space-y-4 ">
@@ -73,7 +95,7 @@ const displyCardSection = (id) => {
           <h3 class="mb-4">"${meaning ? meaning : "কোনো meaning পাওযা যাইনি"} / ${pronunciation ? pronunciation : "কোনো pronunciation পাওযা যাইনি"}"</h3>
         </div>
           <div class="flex justify-evenly items-center">
-          <button class="btn"><i class="fa-solid fa-circle-info"></i></button>
+          <button onclick = "infoDisply(${id})" class="btn"><i class="fa-solid fa-circle-info"></i></button>
           <button class="btn"><i class="fa-solid fa-volume-high"></i></button>
         </div>
     </div>
